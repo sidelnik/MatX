@@ -20,6 +20,10 @@ set(examples
     black_scholes
     print_styles)
 
+set(stf_examples
+    simple_radar_pipeline
+)
+
 
     
     
@@ -53,6 +57,20 @@ foreach( example ${examples} )
     add_executable( ${example} ${file} )
     target_link_libraries(${example} example_lib)
 endforeach()
+
+foreach( example ${examples} )
+    string( CONCAT file ${example} ".cu" )
+
+    set(output_name "${example}_stf")
+    add_executable( ${output_name} ${file} )
+
+    # Add the -DUSE_STF compilation flag
+    target_compile_definitions(${output_name} PRIVATE USE_STF)
+
+    target_link_libraries(${output_name} example_lib)
+endforeach()
+
+
 
 # Build proprietary examples
 file (GLOB_RECURSE proprietary_sources CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/proprietary/*/examples/*.cu)
