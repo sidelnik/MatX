@@ -35,10 +35,6 @@
 #include <memory>
 #include <stdint.h>
 
-//#ifndef USE_STF
-////#define USE_STF 1
-//#endif
-
 using namespace matx;
 
 /**

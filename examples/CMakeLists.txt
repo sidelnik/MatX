@@ -20,13 +20,6 @@ set(examples
     black_scholes
     print_styles)
 
-set(stf_examples
-    simple_radar_pipeline
-)
-
-
-    
-    
 add_library(example_lib INTERFACE)
 target_include_directories(example_lib SYSTEM INTERFACE ${CUTLASS_INC} ${pybind11_INCLUDE_DIR} ${PYTHON_INCLUDE_DIRS})
 
@@ -58,6 +51,7 @@ foreach( example ${examples} )
     target_link_libraries(${example} example_lib)
 endforeach()
 
+# Compile all examples with CUDASTF and append their name with _stf
 foreach( example ${examples} )
     string( CONCAT file ${example} ".cu" )
 
